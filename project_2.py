@@ -67,8 +67,8 @@ def load_img(path_to_img, max_dim):
 """
 
 # YOUR CODE
-content_image = load_img("images/altgebaeude.jpg", max_dim = 512)
-style_image = load_img("images/vangogh.jpg", max_dim = 512)
+content_image = load_img("/home/fpds05/Project_2/images/altgebaeude.jpg", max_dim = 512)
+style_image = load_img("/home/fpds05/Project_2/images/vangogh.jpg", max_dim = 512)
 f, axarr = plt.subplots(1,2)
 axarr[0].imshow(content_image[0])
 axarr[1].imshow(style_image[0])
@@ -77,6 +77,72 @@ axarr[1].imshow(style_image[0])
 
 # YOUR CODE
 print(tf.shape(content_image), tf.shape(style_image), sep="\n")
+
+"""**Checkpoint:** Your output should look like this:
+
+```
+tf.Tensor([  1 337 512   3], shape=(4,), dtype=int32)
+tf.Tensor([  1 405 512   3], shape=(4,), dtype=int32)
+```
+
+## 2.2 Using pretrained models in Keras
+
+```tf.keras.applications``` lets you load various readily trained neural networks, for example ```VGG19``` which we are going to use here. Before starting with Neural Style Transfer, let us see how to use a pretrained model for multiclass classification.
+
+5. Call ```tf.keras.applications.VGG19``` with arguments ```include_top = True``` and ```weights = "imagenet"```, and store the output in a variable ```vgg```.
+
+The first-mentioned argument is to get both the preceding convolutional layers *and* the subsequent fully connected layers at the top of ```VGG19```. Vice versa, ```include_top = False``` lets you load the network without fully connected layers. The version without fully connected layers has the advantage that images of arbitrary height and width are accepted as input and can be propagated through the network (we will make use of this for Neural Style Transfer). The variant you should have loaded now accepts only ```224 x 224``` images. The latter argument ```weights = "imagenet"``` implies that a network is loaded that was pretrained on the ```imagenet``` dataset. By means of ```weights = None```, you can also get a randomly initialized version.
+"""
+
+# YOUR CODE
+vgg = tf.keras.applications.VGG19(include_top=True, weights="imagenet")
+
+"""6. Use ```tf.keras.models.Model.summary``` to get an overview of the model."""
+
+# YOUR CODE
+tf.keras.models.Model.summary(vgg)
+
+"""Each model in ```keras.applications``` has an own preprocessing function that should be applied to inputs before feeding them into the network. In case of ```VGG19```, the preprocessing function expects an image with integer pixel values between 0 and 255 as input.
+
+7. Apply ```tf.keras.applications.vgg19.preprocess_input``` to a version of ```content_image``` with accordingly scaled pixel values and store the output in ```content_image_pp```. Afterwards, use ```tf.image.resize``` to rescale ```content_image_pp``` such that you can apply ```vgg``` to the result ```content_image_rs```. Do the latter and store the output of ```vgg``` in ```predicted_probabilities```.
+"""
+
+# YOUR CODE
+def apply_vgg19_to_image(input):
+  image_pp = tf.keras.applications.vgg19.preprocess_input(tf.cast(input*255, tf.int32))
+  image_rs = tf.image.resize(image_pp, [224, 224])
+  predicted_probabilities = vgg.predict(image_rs)
+  return predicted_probabilities
+predicted_probabilities = apply_vgg19_to_image(content_image)
+
+"""8. Now call ```tf.keras.applications.vgg19.decode_predictions``` with arguments ```predicted_probabilities.numpy()``` and ```top = 10``` to display the top 10 classes and associated probabilities for the given input. Store the output in ```predicted_top_10``` and display ```[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]```."""
+
+# YOUR CODE
+predicted_top_10 = tf.keras.applications.vgg19.decode_predictions(predicted_probabilities, top=10)
+[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]
+
+"""**Checkpoint:** You should have got the following output:
+```
+[('palace', 0.9914493749464944),
+ ('triumphal_arch', 0.00267970467587212),
+ ('monastery', 0.0013206769341534597),
+ ('library', 0.0011177809930798567),
+ ('fountain', 0.0008800198818778909),
+ ('church', 0.0004445435231895076),
+ ('castle', 0.0003099415218987508),
+ ('obelisk', 0.00029764423272215536),
+ ('dome', 0.00022929634370079404),
+ ('cinema', 0.00022750031564633795)]
+ ```
+
+So, according to ```VGG19```, our old building is most probably a palace!
+
+9. Repeat 7. und 8. with ```style_image``` as input.
+"""
+
+# YOUR CODE
+predicted_top_10 = tf.keras.applications.vgg19.decode_predictions(apply_vgg19_to_image(style_image), top=10)
+[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]
 
 # YOUR CODE
 vgg = tf.keras.applications.VGG19(include_top=False, weights="imagenet")
