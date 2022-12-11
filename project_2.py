@@ -146,7 +146,7 @@ So, according to ```VGG19```, our old building is most probably a palace!
 
 """## 2.3 Defining a feature extractor
 
-Now, we come to the main part of this project: *Neural Style Transfer*! To evaluate the objective
+"""Now, we come to the main part of this project: *Neural Style Transfer*! To evaluate the objective
 
 $$J(\mathbf{x}, \mathbf{c}, \mathbf{s}) = \alpha \ J_\mathrm{content}(\mathbf{x}, \mathbf{c}) + \beta \ J_\mathrm{style}(\mathbf{x}, \mathbf{s})\qquad (*)$$
 
