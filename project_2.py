@@ -146,25 +146,6 @@ So, according to ```VGG19```, our old building is most probably a palace!
 
 """## 2.3 Defining a feature extractor
 
-"""Now, we come to the main part of this project: *Neural Style Transfer*! To evaluate the objective
-
-$$J(\mathbf{x}, \mathbf{c}, \mathbf{s}) = \alpha \ J_\mathrm{content}(\mathbf{x}, \mathbf{c}) + \beta \ J_\mathrm{style}(\mathbf{x}, \mathbf{s})\qquad (*)$$
-
-we need a *feature extractor*. The feature extractor shall provide us outputs $\mathrm{a}^{[\ell](\mathbf{x})}$ and $\mathrm{a}^{[\ell](\mathbf{c})}$ of selected convolutional layers of ```VGG19``` that we need to evaluate the content loss:
-
-$$J_\mathrm{content}(\mathbf{x}, \mathbf{c}) = \frac{1}{2 \vert L_\mathrm{content}\vert} \sum_{\ell\in L_\mathrm{content}} \Vert \mathrm{a}^{[\ell](\mathbf{x})} - \mathrm{a}^{[\ell](\mathbf{c})} \Vert_2^2\qquad (**)$$
-
-The set $L_\mathrm{content}$ contains all indices of layers that shall be considered in the content loss. Accordingly, $L_\mathrm{style}$ refers to layers that shall be considered in the style loss.
-
-Respective outputs are used to compute gram matrices $\mathrm{G}^{[\ell](\mathbf{x})}$ and $\mathrm{G}^{[\ell](\mathbf{s})}$ that we need to evaluate the style loss:
-
-$$J_\mathrm{style}(\mathbf{x}, \mathbf{s}) = \frac{1}{4 \vert L_\mathrm{style}\vert} \sum_{\ell\in L_\mathrm{style}} \Vert \mathrm{G}^{[\ell](\mathbf{x})} - \mathrm{G}^{[\ell](\mathbf{s})} \Vert_2^2\qquad (***)$$
-
-Therein, the gram matrices are computed via
-
-$$\mathrm{G}^{[\ell](\mathbf{x})}_{i, j} = \frac{1}{n^{[\ell]}_H n^{[\ell]}_W n^{[\ell]}_C} \langle\mathrm{a}^{[\ell](\mathbf{x})}_{i}, \mathrm{a}^{[\ell](\mathbf{x})}_{j}\rangle\quad\text{für}\quad i, j =1,\dots,n^{[\ell]}_C\qquad (****)$$
-
-and $\mathrm{a}^{[\ell](\mathbf{x})}_{i}$ and $\mathrm{a}^{[\ell](\mathbf{x})}_{j}$ represent the $i$-th and $j$-th channel of $\mathrm{a}^{[\ell](\mathbf{x})}$, respectively.
 
 
 10. Load ```VGG19``` again, this time with ```include_top = False```. Afterwards, display the names of all layers in ```vgg.layers```.
