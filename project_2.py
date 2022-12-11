@@ -95,12 +95,12 @@ The first-mentioned argument is to get both the preceding convolutional layers *
 """
 
 # YOUR CODE
-vgg = tf.keras.applications.VGG19(include_top=True, weights="imagenet")
+"""vgg = tf.keras.applications.VGG19(include_top=True, weights="imagenet")"""
 
 """6. Use ```tf.keras.models.Model.summary``` to get an overview of the model."""
 
 # YOUR CODE
-tf.keras.models.Model.summary(vgg)
+"""tf.keras.models.Model.summary(vgg)"""
 
 """Each model in ```keras.applications``` has an own preprocessing function that should be applied to inputs before feeding them into the network. In case of ```VGG19```, the preprocessing function expects an image with integer pixel values between 0 and 255 as input.
 
@@ -108,18 +108,18 @@ tf.keras.models.Model.summary(vgg)
 """
 
 # YOUR CODE
-def apply_vgg19_to_image(input):
+"""def apply_vgg19_to_image(input):
   image_pp = tf.keras.applications.vgg19.preprocess_input(tf.cast(input*255, tf.int32))
   image_rs = tf.image.resize(image_pp, [224, 224])
   predicted_probabilities = vgg.predict(image_rs)
   return predicted_probabilities
-predicted_probabilities = apply_vgg19_to_image(content_image)
+predicted_probabilities = apply_vgg19_to_image(content_image)"""
 
 """8. Now call ```tf.keras.applications.vgg19.decode_predictions``` with arguments ```predicted_probabilities.numpy()``` and ```top = 10``` to display the top 10 classes and associated probabilities for the given input. Store the output in ```predicted_top_10``` and display ```[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]```."""
 
-# YOUR CODE
+"""# YOUR CODE
 predicted_top_10 = tf.keras.applications.vgg19.decode_predictions(predicted_probabilities, top=10)
-[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]
+[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]"""
 
 """**Checkpoint:** You should have got the following output:
 ```
@@ -141,8 +141,8 @@ So, according to ```VGG19```, our old building is most probably a palace!
 """
 
 # YOUR CODE
-predicted_top_10 = tf.keras.applications.vgg19.decode_predictions(apply_vgg19_to_image(style_image), top=10)
-[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]
+"""predicted_top_10 = tf.keras.applications.vgg19.decode_predictions(apply_vgg19_to_image(style_image), top=10)
+[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]""
 
 """## 2.3 Defining a feature extractor
 
