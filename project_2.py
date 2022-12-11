@@ -147,7 +147,7 @@ So, according to ```VGG19```, our old building is most probably a palace!
 """## 2.3 Defining a feature extractor
 
 
-
+"""
 10. Load ```VGG19``` again, this time with ```include_top = False```. Afterwards, display the names of all layers in ```vgg.layers```.
 """
 
