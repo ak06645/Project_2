@@ -67,8 +67,8 @@ def load_img(path_to_img, max_dim):
 """
 
 # YOUR CODE
-content_image = load_img("/home/fpds05/Project_2/images/altgebaeude.jpg", max_dim = 512)
-style_image = load_img("/home/fpds05/Project_2/images/vangogh.jpg", max_dim = 512)
+content_image = load_img("/images/altgebaeude.jpg", max_dim = 512)
+style_image = load_img("/images/vangogh.jpg", max_dim = 512)
 f, axarr = plt.subplots(1,2)
 axarr[0].imshow(content_image[0])
 axarr[1].imshow(style_image[0])
@@ -95,12 +95,12 @@ The first-mentioned argument is to get both the preceding convolutional layers *
 """
 
 # YOUR CODE
-vgg = tf.keras.applications.VGG19(include_top=True, weights="imagenet")
+"""vgg = tf.keras.applications.VGG19(include_top=True, weights="imagenet")"""
 
 """6. Use ```tf.keras.models.Model.summary``` to get an overview of the model."""
 
 # YOUR CODE
-tf.keras.models.Model.summary(vgg)
+#tf.keras.models.Model.summary(vgg)
 
 """Each model in ```keras.applications``` has an own preprocessing function that should be applied to inputs before feeding them into the network. In case of ```VGG19```, the preprocessing function expects an image with integer pixel values between 0 and 255 as input.
 
@@ -118,8 +118,8 @@ predicted_probabilities = apply_vgg19_to_image(content_image)
 """8. Now call ```tf.keras.applications.vgg19.decode_predictions``` with arguments ```predicted_probabilities.numpy()``` and ```top = 10``` to display the top 10 classes and associated probabilities for the given input. Store the output in ```predicted_top_10``` and display ```[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]```."""
 
 # YOUR CODE
-predicted_top_10 = tf.keras.applications.vgg19.decode_predictions(predicted_probabilities, top=10)
-[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]
+"""predicted_top_10 = tf.keras.applications.vgg19.decode_predictions(predicted_probabilities, top=10)
+[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]"""
 
 """**Checkpoint:** You should have got the following output:
 ```
@@ -141,11 +141,11 @@ So, according to ```VGG19```, our old building is most probably a palace!
 """
 
 # YOUR CODE
-predicted_top_10 = tf.keras.applications.vgg19.decode_predictions(apply_vgg19_to_image(style_image), top=10)
-[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]
+"""predicted_top_10 = tf.keras.applications.vgg19.decode_predictions(apply_vgg19_to_image(style_image), top=10)
+[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]"""
 
 # YOUR CODE
-vgg = tf.keras.applications.VGG19(include_top=False, weights="imagenet")
+vgg = tf.keras.models.load_model('vgg19/vgg19_weights.h5')
 print('\n'.join([layer.name for layer in vgg.layers]))
 
 """**Checkpoint:** Your output should look as follows:
