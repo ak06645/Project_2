@@ -145,7 +145,7 @@ So, according to ```VGG19```, our old building is most probably a palace!
 [(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]"""
 
 # YOUR CODE
-vgg = tf.keras.models.load_model('vgg19/vgg19_weights.h5')
+vgg = tf.keras.models.load_model('vgg19_weights.h5')
 print('\n'.join([layer.name for layer in vgg.layers]))
 
 """**Checkpoint:** Your output should look as follows:
