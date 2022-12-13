@@ -107,13 +107,13 @@ The first-mentioned argument is to get both the preceding convolutional layers *
 7. Apply ```tf.keras.applications.vgg19.preprocess_input``` to a version of ```content_image``` with accordingly scaled pixel values and store the output in ```content_image_pp```. Afterwards, use ```tf.image.resize``` to rescale ```content_image_pp``` such that you can apply ```vgg``` to the result ```content_image_rs```. Do the latter and store the output of ```vgg``` in ```predicted_probabilities```.
 """
 
-# YOUR CODE
+"""# YOUR CODE
 def apply_vgg19_to_image(input):
   image_pp = tf.keras.applications.vgg19.preprocess_input(tf.cast(input*255, tf.int32))
   image_rs = tf.image.resize(image_pp, [224, 224])
   predicted_probabilities = vgg.predict(image_rs)
   return predicted_probabilities
-predicted_probabilities = apply_vgg19_to_image(content_image)
+predicted_probabilities = apply_vgg19_to_image(content_image)"""
 
 """8. Now call ```tf.keras.applications.vgg19.decode_predictions``` with arguments ```predicted_probabilities.numpy()``` and ```top = 10``` to display the top 10 classes and associated probabilities for the given input. Store the output in ```predicted_top_10``` and display ```[(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]```."""
 
