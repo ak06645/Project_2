@@ -67,8 +67,8 @@ def load_img(path_to_img, max_dim):
 """
 
 # YOUR CODE
-content_image = load_img("/images/altgebaeude.jpg", max_dim = 512)
-style_image = load_img("/images/vangogh.jpg", max_dim = 512)
+content_image = load_img("images/altgebaeude.jpg", max_dim = 512)
+style_image = load_img("images/vangogh.jpg", max_dim = 512)
 f, axarr = plt.subplots(1,2)
 axarr[0].imshow(content_image[0])
 axarr[1].imshow(style_image[0])
