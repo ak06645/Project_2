@@ -190,9 +190,10 @@ style_layers = ["block1_conv1", "block2_conv1", "block3_conv1", "block4_conv1", 
 # YOUR CODE
 from typing import List
 def vgg_layers(layer_names: List[str]) -> tf.keras.models.Model:
-  vgg19 = tf.keras.applications.VGG19(include_top=False, weights="imagenet")
-  model = tf.keras.Model(inputs = vgg19.input, outputs = [vgg19.get_layer(layer_name).output for layer_name in layer_names])
-  return model
+    save_model()
+    vgg19 = load_model()
+    model = tf.keras.Model(inputs = vgg19.input, outputs = [vgg19.get_layer(layer_name).output for layer_name in layer_names])
+    return model
 
 vgg_layers(style_layers).output
 
@@ -449,10 +450,6 @@ for loop in range(loops):
         tf.summary.scalar('loss', data=loss, step=loop * iters_per_loop + it)
 
 
-def apply_style_trasfer(max_dim, path_to_content_image, path_to_style_image):
-    content_image = load_img(path_to_content_image, max_dim=max_dim)
-    style_image = load_img(path_to_content_image, max_dim=max_dim)
-    return None
 
 """29. Submit this notebook not later than December 11th.
 
@@ -472,3 +469,18 @@ Importantly, you need to use your own code to create the images. Moreover, your 
 
 We recommend to use the GPU cluster, especially when you increase the image resolution.
 """
+
+class StyleTransfer:
+    def __init__(max_dim, content_image, style_image, style_layers, content_layers):
+        self.max_dim = max_dim
+        self.extractor = StyleContentModel(style_layers, content_layers)
+        self.style_targets = extractor(load_img(style_image, max_dim=max_dim))["style"]
+        self.content_targets = extractor(load_img(content_image, max_dim=max_dim))["style"]
+
+def apply_style_trasfer(max_dim, path_to_content_image,
+path_to_style_image, content_layers=content_layers, style_layers=style_layers):
+    content_image = load_img(path_to_content_image, max_dim=max_dim)
+    style_image = load_img(path_to_content_image, max_dim=max_dim)
+    style_targets = extractor(style_image)["style"]
+    
+    return None
