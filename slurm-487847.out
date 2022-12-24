@@ -1,0 +1,58 @@
+2022-12-24 13:11:26.160374: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-12-24 13:19:32.992234: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-12-24 13:19:33.299364: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2022-12-24 13:19:33.357377: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:85:00.0 name: NVIDIA GeForce RTX 3080 computeCapability: 8.6
+coreClock: 1.71GHz coreCount: 68 deviceMemorySize: 9.78GiB deviceMemoryBandwidth: 707.88GiB/s
+2022-12-24 13:19:33.357435: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-12-24 13:19:34.174938: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2022-12-24 13:19:34.175054: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2022-12-24 13:19:34.732416: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-12-24 13:19:35.359844: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-12-24 13:19:35.961337: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-12-24 13:19:36.552924: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2022-12-24 13:19:37.253955: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2022-12-24 13:19:37.258410: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2022-12-24 13:19:37.259069: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-12-24 13:19:37.259858: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-12-24 13:19:37.262180: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:85:00.0 name: NVIDIA GeForce RTX 3080 computeCapability: 8.6
+coreClock: 1.71GHz coreCount: 68 deviceMemorySize: 9.78GiB deviceMemoryBandwidth: 707.88GiB/s
+2022-12-24 13:19:37.262232: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-12-24 13:19:37.262269: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2022-12-24 13:19:37.262296: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2022-12-24 13:19:37.262411: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-12-24 13:19:37.262449: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-12-24 13:19:37.262530: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-12-24 13:19:37.262567: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2022-12-24 13:19:37.262651: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2022-12-24 13:19:37.266816: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2022-12-24 13:19:37.266870: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-12-24 13:29:16.302702: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-12-24 13:29:16.302766: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2022-12-24 13:29:16.302785: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2022-12-24 13:29:16.308632: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 9073 MB memory) -> physical GPU (device: 0, name: NVIDIA GeForce RTX 3080, pci bus id: 0000:85:00.0, compute capability: 8.6)
+tf.Tensor([  1 338 512   3], shape=(4,), dtype=int32)
+tf.Tensor([  1 406 512   3], shape=(4,), dtype=int32)
+Save model...
+Traceback (most recent call last):
+  File "project_2.py", line 149, in <module>
+    save_model("/beegfs/work/fpds05/Project_2")
+  File "/home/fpds05/Project_2/load_vgg19.py", line 18, in save_model
+    vgg = tf.keras.applications.VGG19(include_top=False, weights='imagenet')
+  File "/home/fpds05/.conda/envs/my_env/lib/python3.8/site-packages/tensorflow/python/keras/applications/vgg19.py", line 227, in VGG19
+    model.load_weights(weights_path)
+  File "/home/fpds05/.conda/envs/my_env/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py", line 2234, in load_weights
+    hdf5_format.load_weights_from_hdf5_group(f, self.layers)
+  File "/home/fpds05/.conda/envs/my_env/lib/python3.8/site-packages/tensorflow/python/keras/saving/hdf5_format.py", line 679, in load_weights_from_hdf5_group
+    g = f[name]
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/home/fpds05/.conda/envs/my_env/lib/python3.8/site-packages/h5py/_hl/group.py", line 264, in __getitem__
+    oid = h5o.open(self.id, self._e(name), lapl=self._lapl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5o.pyx", line 190, in h5py.h5o.open
+KeyError: "Unable to open object (file read failed: time = Sat Dec 24 13:29:18 2022\n, filename = '/home/fpds05/.keras/models/vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5', file descriptor = 22, errno = 5, error message = 'Input/output error', buf = 0x557fd8283260, total read size = 352, bytes this sub-read = 352, bytes actually read = 18446744073709551615, offset = 0)"
+srun: error: gpu05: task 0: Exited with exit code 1

@@ -145,7 +145,9 @@ So, according to ```VGG19```, our old building is most probably a palace!
 [(class_name, prob) for (number, class_name, prob) in predicted_top_10[0]]"""
 
 # YOUR CODE
-vgg = tf.keras.models.load_model('vgg19_weights.h5')
+from load_vgg19 import save_model, load_model
+save_model()
+vgg = load_model()
 print('\n'.join([layer.name for layer in vgg.layers]))
 
 """**Checkpoint:** Your output should look as follows:
@@ -445,6 +447,12 @@ for loop in range(loops):
         # YOUR CODE
         loss = train_step(image, opt)
         tf.summary.scalar('loss', data=loss, step=loop * iters_per_loop + it)
+
+
+def apply_style_trasfer(max_dim, path_to_content_image, path_to_style_image):
+    content_image = load_img(path_to_content_image, max_dim=max_dim)
+    style_image = load_img(path_to_content_image, max_dim=max_dim)
+    return None
 
 """29. Submit this notebook not later than December 11th.
 
